@@ -1003,12 +1003,25 @@ let arrString = [...input.split('\n')];
 
 let values = [];
 
-const r = /\d+/;
 let arrVals = [];
 
-for (let i = 0; i < arrString.length; i++) {
-    let curr = arrString[i];
-    console.log(r.exec(curr));
+for (let i = 0; i < arrString.length - 1; i++) {
+    arrString[i] = arrString[i].replace(/[^0-9]/g, "");
 }
 
-console.log(arrVals)
+for (let i = 0; i < arrString.length - 1; i++) {
+    let curr = arrString[i];
+    if (curr.length > 2) {
+        curr = curr[0] + curr[curr.length - 1];
+    }
+    if (curr.length < 2) {
+        curr = curr[0] + curr[0];
+    }
+    curr = Number(curr);
+    values.push(curr)
+}
+console.log(values)
+console.log(values.reduce(
+    (sum, curr) => 
+    sum + curr, 0
+))
